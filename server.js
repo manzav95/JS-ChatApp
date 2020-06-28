@@ -1,4 +1,17 @@
-const io = require('socket.io')(3000);
+const PORT = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+
+let http = require('http');
+let server = http.Server(app);
+
+app.use(express.static('client'));
+
+server.listen(PORT, function () {
+  console.log(`Server is running on port: ${PORT}`);
+});
+
+const io = require('socket.io')(PORT);
 
 const users = {};
 
